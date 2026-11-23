@@ -1,27 +1,30 @@
 # ZOOVIA Platform
 
-Next.js 15 / React 19 project. Deploy on Vercel by importing this repository and using the default Next.js build settings.
+Next.js 15 / React 19 project. Existing ration assistant and admin panel routes are retained.
 
-## Environment variables
+## Routes
+- `/` Home
+- `/about` About
+- `/products` Product catalogue
+- `/contact` Contact
+- `/login` Producer signup/login
+- `/ration` Ration support request
+- `/admin/login` Admin login
+- `/admin` Admin panel
 
-Set these in Vercel Project Settings → Environment Variables:
+## Local development
+```bash
+npm install
+npm run dev
+```
 
+## Vercel environment variables
+Set the following in Project Settings → Environment Variables:
 - `ADMIN_USERNAME`
 - `ADMIN_PASSWORD`
-- `ADMIN_SESSION_SECRET` (long random secret)
+- `ADMIN_SESSION_SECRET`
 
-## Included routes
+## Important data limitation
+This package currently stores producer accounts, ingredient data, groups and ration support requests in browser `localStorage`. The producer signup/login flow accepts either the registered phone number or email as the login identifier, without email/phone verification. Requests are visible in the admin panel when both producer and admin use the same browser profile and deployed origin. Data is not shared between different devices or browsers and is not durable server-side storage. A production multi-device workflow requires a shared database and server-side member authentication; database credentials must be configured in Vercel before enabling that workflow.
 
-- `/` homepage
-- `/about`, `/products`, `/contact`
-- `/ration` producer ration-support form
-- `/login` member sign-up / sign-in
-- `/admin/login`, `/admin` management panel
-
-## Important data-storage note
-
-This project snapshot's member accounts, ingredient library, ingredient groups and support-request queue still use browser `localStorage`. This means they are stored per browser/device and are not shared with the administrator on another device. A shared database (for example Supabase or Neon/Postgres) and server-side member authentication are required before using the platform for real producer registrations and cross-device admin request management. Do not treat the current localStorage flow as production-grade authentication or shared request storage.
-
-## Product imagery
-
-The eight ZOOVIA product package visuals are in `public/products/`.
+The ingredient library preserves the existing editable admin structure. The NRC/NASEM source nutrient values are not populated with invented values; the supplied source tables must be imported to complete those data fields.
