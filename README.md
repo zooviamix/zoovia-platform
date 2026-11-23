@@ -1,24 +1,28 @@
-# ZOOVIA Platform
+# ZOOVIA Kurumsal Site Güncellemesi
 
-## V4 düzeltmeleri
-- Rasyon destek formunun önceki adımlı tasarımı korunmuştur. Sadece son adımda rasyon önerisi/hesaplaması yerine destek talebi ön izlemesi ve gönderimi bulunur.
-- Ürünlerde eski küçükbaş premiks görseli (`public/products/premix-4.webp`) korunmuştur. Sonradan eklenen alternatif küçükbaş çuval görseli kaldırılmıştır.
-- Ürün grup filtreleri seçilen grubu gösterir; Tümü bütün ürünleri gösterir.
-- Üye giriş/kayıt ekranında ayrı Yönetici Girişi bağlantısı vardır.
-- Yönetici girişi sunucu tarafında, HttpOnly oturum çereziyle doğrulanır.
-- Yönetim panelinde 32 hammadde adı, düzenlenebilir besin parametreleri, grup yönetimi ve destek talebi listesi bulunur.
+Bu paket, mevcut `zoovia-platform` Next.js 15 / React 19 projesine eklenmek üzere hazırlanmış kurumsal web sitesi arayüzüdür. Holistik Çiftlik sitesinin birebir kopyası değildir; kurumsal yaklaşımından esinlenerek ZOOVIA markasına ve yeni sekiz ürünlük ambalaj ailesine uyarlanmıştır.
 
-## Yönetici hesabını Vercel'de etkinleştirme
-Vercel → Project → Settings → Environment Variables bölümüne şu üç değişkeni ekleyin:
+## Pakette neler var?
+- Yeni kurumsal ana sayfa (`app/page.tsx`)
+- Ürün kataloğu ve dinamik ürün detayları (`app/products`)
+- Hakkımızda, çözümlerimiz, bayilik, iletişim ve bilgi merkezi sayfaları
+- Ortak header/footer ve responsive tasarım bileşenleri
+- Sekiz ürün ambalaj görseli ve koleksiyon görseli
 
-- `ADMIN_USERNAME`
-- `ADMIN_PASSWORD`
-- `ADMIN_SESSION_SECRET`
+## GitHub'a uygulama
+1. ZIP'i bilgisayarınızda açın.
+2. İçindeki `app`, `components` ve `public` klasörlerini mevcut `zoovia-platform` deposunun kök dizinine kopyalayın.
+3. Dosya çakışmalarında bu paketteki `app/page.tsx` dosyası ana sayfayı yeniler. Mevcut `app/ration`, `app/admin` ve diğer mevcut sayfalar silinmez; yalnızca aynı isimli `app/products` varsa önce mevcut içeriğini yedekleyin.
+4. GitHub'da değişiklikleri commit edin. Vercel bağlıysa yeni dağıtım otomatik başlar.
 
-`.env.example` dosyasında örnek biçim vardır. Değerleri gizli tutun; GitHub deposuna gerçek `.env` dosyası yüklemeyin. Değişkenleri ekledikten sonra yeniden deploy edin. Yönetici girişi `/admin/login` adresindedir; normal üye giriş ekranındaki Yönetici Girişi bağlantısı da buraya gider.
+## Yerel kontrol
+```bash
+npm install
+npm run dev
+```
 
-## Veri notu
-Üye kayıtları, hammadde düzenlemeleri ve destek talepleri bu prototip sürümünde tarayıcı `localStorage` alanında saklanır. Bu nedenle farklı cihazlardan gelen gerçek kullanıcı taleplerini ortak yönetim panelinde göstermek için veritabanı entegrasyonu gerekir. Ayrıca 32 hammaddenin adları eklenmiştir; kullanıcının orijinal NRC/NASEM 32'li besin değerleri tablosu erişilebilir proje dosyalarında bulunmadığından bilimsel besin değerleri uydurulmamış, doğrulanamayan alanlar boş bırakılmıştır.
-
-## Çalıştırma
-`npm install` ardından `npm run dev`; üretim derlemesi için `npm run build`.
+## Önemli entegrasyon notları
+- Rasyon (`/ration`) ve yönetici paneli (`/admin`) mevcut depodaki halleriyle korunur; bu paket bu modülleri yeniden yazmaz.
+- İletişim formu şimdilik e-posta uygulamasına taslak açar. Gerçek web formu gönderimi için güvenli sunucu tarafı e-posta entegrasyonu gerekir.
+- Ürün açıklamaları genel tanıtım metinleridir. Kesin bileşim, doz ve kullanım talimatları ürün etiketleri/onaylı teknik dokümanlarla tamamlanmalıdır.
+- Ürün ambalajları konsept görselleridir; baskı öncesi logo, yazım, net miktar ve mevzuat bilgileri tasarım dosyasında son kez kontrol edilmelidir.
