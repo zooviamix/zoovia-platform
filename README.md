@@ -1,26 +1,24 @@
-# ZOOVIA Platform v4
+# ZOOVIA Platform
 
-## GitHub / Vercel
-1. ZIP içeriğini GitHub deposunun kök dizinine yükleyin (mevcut dosyaların üzerine yazın).
-2. Vercel projesi aynı depoya bağlıysa yeni commit sonrası otomatik dağıtım başlar.
+## V4 düzeltmeleri
+- Rasyon destek formunun önceki adımlı tasarımı korunmuştur. Sadece son adımda rasyon önerisi/hesaplaması yerine destek talebi ön izlemesi ve gönderimi bulunur.
+- Ürünlerde eski küçükbaş premiks görseli (`public/products/premix-4.webp`) korunmuştur. Sonradan eklenen alternatif küçükbaş çuval görseli kaldırılmıştır.
+- Ürün grup filtreleri seçilen grubu gösterir; Tümü bütün ürünleri gösterir.
+- Üye giriş/kayıt ekranında ayrı Yönetici Girişi bağlantısı vardır.
+- Yönetici girişi sunucu tarafında, HttpOnly oturum çereziyle doğrulanır.
+- Yönetim panelinde 32 hammadde adı, düzenlenebilir besin parametreleri, grup yönetimi ve destek talebi listesi bulunur.
 
-## Yönetici paneli
-- Adres: `/admin/login`
-- Kullanıcı adı: `zooviaadmin`
-- Şifre: `Zoovia2026!`
-- Giriş yaptıktan sonra `/admin` panelinden rasyon destek taleplerini ve hammadde kütüphanesini yönetin.
-- Yayına almadan önce bu örnek yönetici parolasını değiştirin ve gerçek sunucu tarafı kimlik doğrulama/veritabanı entegrasyonu kurun.
+## Yönetici hesabını Vercel'de etkinleştirme
+Vercel → Project → Settings → Environment Variables bölümüne şu üç değişkeni ekleyin:
 
-## v4 değişiklikleri
-- Otomatik rasyon hesaplama/robot akışı kaldırıldı; form yalnızca destek talebi toplar.
-- Üye kayıt ve giriş ekranı etkinleştirildi.
-- Yönetici panelinde üretici adıyla gelen destek talepleri listelenir; durumları değiştirilebilir.
-- 32 hammadde kaydı kütüphaneye eklendi; grup ve besin parametreleri düzenlenebilir.
-- Ürün galerisi Büyükbaş → Küçükbaş → Kanatlı sırasına alındı; grup filtreleri sadece seçilen grubu gösterir, Tümü hepsini gösterir.
-- Küçükbaş ürün fotoğrafında kullanıcının önceki mor çuval tasarımı korunarak tek koyunlu orijinal görsel kullanıldı.
+- `ADMIN_USERNAME`
+- `ADMIN_PASSWORD`
+- `ADMIN_SESSION_SECRET`
 
-## Önemli veri notu
-Bu ZIP'e erişilebilen önceki proje dosyalarında NRC/NASEM 32 hammaddelik özgün katkı tablosu bulunmadı. Bu nedenle 32 hammadde adı açıldı, ancak doğrulanamayan besin değerleri boş bırakıldı; hiçbir değer uydurulmadı. Orijinal 32'li NRC rapor tablosu sisteme aktarılınca ilgili alanlar gerçek verilerle doldurulmalıdır.
+`.env.example` dosyasında örnek biçim vardır. Değerleri gizli tutun; GitHub deposuna gerçek `.env` dosyası yüklemeyin. Değişkenleri ekledikten sonra yeniden deploy edin. Yönetici girişi `/admin/login` adresindedir; normal üye giriş ekranındaki Yönetici Girişi bağlantısı da buraya gider.
 
-## Veri saklama notu
-Bu v4 önizlemesinde üyeler, destek talepleri ve yönetim verileri tarayıcı `localStorage` alanında tutulur. Bu nedenle farklı üreticilerin cihazlarından gelen kayıtlar otomatik olarak tek yönetici ekranında birleşmez; canlı kullanım için Supabase gibi sunucu veritabanı ve güvenli auth bağlantısı gerekir.
+## Veri notu
+Üye kayıtları, hammadde düzenlemeleri ve destek talepleri bu prototip sürümünde tarayıcı `localStorage` alanında saklanır. Bu nedenle farklı cihazlardan gelen gerçek kullanıcı taleplerini ortak yönetim panelinde göstermek için veritabanı entegrasyonu gerekir. Ayrıca 32 hammaddenin adları eklenmiştir; kullanıcının orijinal NRC/NASEM 32'li besin değerleri tablosu erişilebilir proje dosyalarında bulunmadığından bilimsel besin değerleri uydurulmamış, doğrulanamayan alanlar boş bırakılmıştır.
+
+## Çalıştırma
+`npm install` ardından `npm run dev`; üretim derlemesi için `npm run build`.
