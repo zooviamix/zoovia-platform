@@ -1,5 +1,6 @@
 "use client";
 import {useMemo,useState} from "react";
+import Link from "next/link";
 type Feed={name:string;qty:string};
 const breeds=["Holstein","Simental","Montofon","Brown Swiss","Diğer"];
 const options:Record<string,string[]>={lactation:["50","100","150","200","200+"],fat:["3.4","3.6","3.8","4.0","4.2"],protein:["3.0","3.2","3.4","3.6"],parity:["1. laktasyon","2. laktasyon","3. laktasyon","4 ve üzeri"],milk:["15 altı","15–20","20–25","25–30","30–35","35–40","40+"],weight:["450","500","550","600","650","700","750+"] ,bcs:["2.0 ve altı","2.25","2.50","2.75","3.00","3.25","3.50","3.75+"]};
