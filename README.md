@@ -1,33 +1,23 @@
-# ZOOVIA – bağımsız web platformu prototipi
+# ZOOVIA Platform
 
-Bu sürüm, kullanıcının tarif ettiği ZOOVIA marka sitesi ve rasyon akışının görsel/etkileşimli prototipidir.
-
-## Neler var?
-- Mobil uyumlu kurumsal ana sayfa ve ZOOVIA görsel kimliği için geçici logo yaklaşımı
-- Ayrı Hakkımızda, Ürünlerimiz, İletişim ve Üye Girişi sayfaları
-- Büyükbaş/küçükbaş → üretim grubu → ırk → kademeli parametre seçimi
-- Mevcut rasyon yemlerini satır satır girme arayüzü
-- Rapor ön izleme ve tarayıcıdan PDF olarak kaydetme/yazdırma
-- Sağ altta canlı destek yerine “Rasyon Hazırla” kısayol kutusu
-- Bayilik ve iletişim formu arayüzleri
+Next.js 15 / React 19 tabanlı ZOOVIA web platformu.
 
 ## Yerel çalıştırma
-1. Node.js LTS kurun.
-2. Terminalde proje klasörüne girin.
-3. `npm install`
-4. `npm run dev`
-5. `http://localhost:3000` adresini açın.
 
-## Önemli: Prototip sınırı
-Bu sürümde gerçek kullanıcı doğrulaması, veritabanına kayıt, e-posta gönderimi, OpenAI bağlantısı ve bilimsel rasyon hesaplama motoru henüz bağlı değildir. PDF düğmesi tarayıcının yazdırma/PDF kaydetme penceresini açar. Rapor ön izlemesi gerçek rasyon sonucu değildir.
+```bash
+npm install
+npm run dev
+```
 
-Üretim sürümünde:
-- Supabase Auth (telefon veya e-posta), PostgreSQL
-- Yönetici paneli ve manuel Pro yetkilendirmesi
-- Doğrulanmış yem analiz veri tabanı ve NASEM/NRC tabanlı test edilebilir hesaplama motoru
-- AI ile açıklama/yorum katmanı (sayısal hesapların yerine geçmez)
-- Sunucu tarafında kurumsal PDF raporu, rapor arşivi
-- Bayilik başvuru kaydı ve e-posta bildirimi
-- Güvenlik, yetkilendirme, yedekleme ve yayın altyapısı
+## Bölümler
 
-Gerçek yem miktarları ve besleme önerileri, hesaplama motoru ve parametreler uzman kontrolünden geçmeden otomatik olarak sunulmamalıdır.
+- `/` Ana sayfa
+- `/products` Ürün kataloğu (ürün görselleri `public/products` klasöründe)
+- `/ration` Rasyon formu
+- `/admin` Yönetici paneli
+
+## Yönetici paneli prototipi
+
+Yönetici panelinde hammadde ekleme/düzenleme/silme, besin değerlerini girme, gruplandırma ve rasyon parametrelerini düzenleme arayüzleri bulunur. Bu ilk sürümde değişiklikler tarayıcı `localStorage` alanında saklanır. Ortak ve kalıcı canlı kullanım için sunucu tarafı veritabanı, kimlik doğrulama ve yetki kontrolü bağlanmalıdır. Başlangıç hammadde kayıtları yalnızca örnek arayüz verisidir; NRC/NASEM referans değeri olarak kullanılmamalıdır.
+
+Rasyon formundaki hammadde seçimi, aynı tarayıcıdaki yönetici panelinde kayıtlı hammadde adlarını okur.
