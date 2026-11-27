@@ -102,3 +102,21 @@
 
 /* Final brand refinements */
 .header .logo img{width:175px!important;height:auto!important}.about-emblem{gap:8px}.about-emblem img{width:190px}.knowledge-photo img{display:block;width:100%;height:100%;object-fit:cover}.farm-story-image{background-image:linear-gradient(0deg,#183d2b55,#183d2b00),url("https://images.pexels.com/photos/37409094/pexels-photo-37409094.jpeg?auto=compress&cs=tinysrgb&w=1600")!important;background-size:cover!important}.about-visual-photo{background-image:linear-gradient(0deg,#193e2b33,#193e2b00),url("https://images.pexels.com/photos/37409094/pexels-photo-37409094.jpeg?auto=compress&cs=tinysrgb&w=1600")!important;background-size:cover!important}
+
+
+/* ZOOVIA final requested corrections */
+.header .logo img{width:175px!important;height:auto!important;max-height:62px;object-fit:contain}
+.about-emblem img{width:205px!important;height:auto!important}
+.float-wrap{right:22px!important;bottom:18px!important;align-items:flex-end}
+.float-button{width:246px!important;height:86px!important;min-height:0!important;padding:0 28px!important;display:flex!important;align-items:center!important;justify-content:center!important;gap:0!important;background:transparent!important;border:0!important;border-radius:0!important;clip-path:none!important;box-shadow:none!important;filter:drop-shadow(0 7px 10px rgba(18,61,42,.18))!important;transform:none!important;color:#fff!important;position:relative!important}
+.float-button:before,.float-button:after{display:none!important;content:none!important}
+.float-button .float-leaf{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;z-index:0!important;overflow:visible}
+.float-button span{position:relative!important;z-index:2!important;transform:none!important;color:#fff!important;font-size:13px!important;font-weight:800!important;letter-spacing:.1px}
+.float-button b{display:none!important}
+.float-button .float-leaf path:first-child{fill:#205c46}
+.float-button .float-leaf path:not(:first-child){opacity:.9}
+.farm-story{display:none!important}
+.about-visual-photo{background-image:linear-gradient(0deg,#193e2b33,#193e2b00),url('https://www.zeiss.com/content/dam/spc/images/applications-industries/agriculture/applications_feed_forage.jpeg/_jcr_content/renditions/original.image_file.1440.810.file/applications_feed_forage.jpeg')!important;background-size:cover!important}
+@media(max-width:760px){.header .logo img{width:145px!important;max-height:54px}.float-button{width:205px!important;height:72px!important}.float-button span{font-size:12px!important}}
+
+.home-close-cta{margin:0;padding:64px 9%;display:flex;align-items:center;justify-content:space-between;gap:36px;background:#e8efe4;border-top:1px solid #dce6d8}.home-close-cta h2{font:800 clamp(28px,3vw,40px)/1.18 Manrope;letter-spacing:-1.2px;margin:15px 0;color:#172d25}.home-close-cta h2 em{font-style:normal;color:#205c46}.home-close-cta p{max-width:650px;color:#68776d;font-size:14px;line-height:1.8}.home-close-actions{display:flex;gap:10px;flex-wrap:wrap;flex-shrink:0}@media(max-width:760px){.home-close-cta{padding:42px 7%;display:block}.home-close-actions{margin-top:20px}.home-close-actions .btn{flex:1;padding:13px 12px;font-size:11px}}
