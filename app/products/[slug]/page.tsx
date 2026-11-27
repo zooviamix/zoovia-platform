@@ -12,7 +12,7 @@ export function generateStaticParams() {
 export default async function ProductDetail({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const product = products.find(item => slugify(item.name) === slug);
-  if (!product) notFound();
+  if (!product) { notFound(); }
 
   return <main className="product-detail-page">
     <div className="product-detail-top"><Link href="/products" className="product-back-link">← Tüm ürünlere dön</Link><div className="eyebrow">ZOOVIA ÜRÜN KOLEKSİYONU</div></div>
