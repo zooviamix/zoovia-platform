@@ -1,15 +1,22 @@
 "use client";
 import Image from "next/image";
-import {useMemo,useState} from "react";
-const products=[
-{name:"VIAMILK",title:"Süt Premiksi",group:"Büyükbaş",image:"/products/viamilk.webp",tag:"SÜT SIĞIRI",description:"Süt sığırlarının günlük besleme programlarını vitamin ve mineral yönünden desteklemek üzere tasarlanmış premiks çözümü.",details:["Süt sığırı rasyonlarında kullanım için", "Vitamin ve mineral desteği", "İşletme ihtiyacına göre rasyonla birlikte değerlendirilir"]},
-{name:"VIAMILK PLUS",title:"Zenginleştirilmiş Süt Premiksi",group:"Büyükbaş",image:"/products/viamilk-plus.webp",tag:"SÜT SIĞIRI",description:"Süt verimi ve dönemsel ihtiyaçlar dikkate alınarak zenginleştirilmiş süt premiksi.",details:["Yoğun süt üretim dönemlerine yönelik", "Zenginleştirilmiş mikro besin desteği", "Kullanım miktarı teknik değerlendirmeyle belirlenir"]},
-{name:"VIAMIX BEEF",title:"Besi Premiksi",group:"Büyükbaş",image:"/products/viamix-beef.webp",tag:"BESİ",description:"Besi sığırlarının gelişim ve besi performansı hedeflerine uygun mineral-vitamin premiks çözümü.",details:["Besi dönemi için tasarlanmıştır", "Rasyonun mineral-vitamin dengesini destekler", "Kullanım miktarı rasyona göre belirlenir"]},
-{name:"VIAMIX OVIN",title:"Koyun-Keçi Premiksi",group:"Küçükbaş",image:"/products/viamix-ovin.webp",tag:"KOYUN & KEÇİ",description:"Koyun ve keçilerin farklı fizyolojik dönemlerindeki besleme ihtiyaçları için premiks çözümü.",details:["Koyun ve keçi beslemesine yönelik", "Dönemsel ihtiyaçlar dikkate alınır", "Sürü rasyonuna göre kullanılır"]},
-{name:"VIACALF",title:"Buzağı Destek Ürünü",group:"Buzağı",image:"/products/viacalf.webp",tag:"BUZAĞI",description:"Buzağı yetiştirme döneminde besleme programını desteklemek amacıyla geliştirilen ürün.",details:["Buzağı dönemine yönelik destek", "Yetiştirme programıyla birlikte değerlendirilir", "Uygulama talimatına göre kullanılır"]},
-{name:"VIASACC",title:"Canlı Maya",group:"Yem Katkıları",image:"/products/viasacc.webp",tag:"CANLI MAYA",description:"Rumen mikrobiyal faaliyetinin ve rasyon dengesinin desteklenmesine yönelik canlı maya ürünü.",details:["Rumen fonksiyonlarının desteklenmesine yönelik", "TMR ve karma yem programlarında değerlendirilir", "Kullanım miktarı ürün etiketine göre belirlenir"]},
-{name:"VIATOKS",title:"Toksin Bağlayıcı",group:"Yem Katkıları",image:"/products/viatoks.webp",tag:"YEM GÜVENLİĞİ",description:"Yem hammaddelerinde karşılaşılabilecek mikotoksin risklerinin yönetimine yönelik yem katkısı.",details:["Yem güvenliği programlarında kullanılır", "Hammadde ve risk profiline göre değerlendirilir", "Kullanım miktarı ürün etiketine göre belirlenir"]},
-{name:"VIABUFFER",title:"Rumen Tamponlayıcı",group:"Yem Katkıları",image:"/products/viabuffer.webp",tag:"RUMEN DENGESİ",description:"Rumen pH dengesinin korunmasına yönelik besleme programlarında kullanılan tamponlayıcı ürün.",details:["Rumen pH yönetimine destek", "Özellikle yoğun kesif yem içeren rasyonlarda değerlendirilir", "Kullanım miktarı rasyon ve ürün etiketine göre belirlenir"]}
-];
-const groups=["Tümü","Büyükbaş","Küçükbaş","Buzağı","Yem Katkıları"];
-export default function Products(){const [active,setActive]=useState("Tümü"),[selected,setSelected]=useState<typeof products[number]|null>(null);const visible=useMemo(()=>active==="Tümü"?products:products.filter(p=>p.group===active),[active]);return <main className="page-shell products-page"><div className="eyebrow">ZOOVIA ÜRÜN KOLEKSİYONU</div><h1>Her gramında<br/><em>güven.</em></h1><p className="page-lead">Hayvan besleme ihtiyaçlarına yönelik ZOOVIA ürün serisi.</p><div className="product-filter">{groups.map(g=><button type="button" key={g} className={active===g?"selected":""} onClick={()=>setActive(g)}>{g}</button>)}</div><div className="product-gallery">{visible.map(p=><article className="product-tile" key={p.name}><div className="product-photo"><Image src={p.image} alt={`${p.name} ${p.title}`} fill sizes="(max-width:760px) 90vw, 30vw" style={{objectFit:"contain"}}/><span>{p.tag}</span></div><div className="product-info"><small>{p.group.toLocaleUpperCase("tr-TR")} / ZOOVIA</small><h2>{p.name}</h2><p>{p.title}</p><p className="product-description">{p.description}</p><button type="button" className="product-detail-btn" onClick={()=>setSelected(p)}>Ürünü İncele <b>↗</b></button></div></article>)}</div>{selected&&<div className="product-modal-backdrop" role="presentation" onClick={()=>setSelected(null)}><section className="product-modal" role="dialog" aria-modal="true" aria-label={`${selected.name} ürün detayları`} onClick={e=>e.stopPropagation()}><button className="modal-close" onClick={()=>setSelected(null)} aria-label="Kapat">×</button><div className="modal-product-image"><Image src={selected.image} alt={selected.name} fill sizes="320px" style={{objectFit:"contain"}}/></div><div><div className="eyebrow">{selected.group} / ZOOVIA</div><h2>{selected.name}</h2><h3>{selected.title}</h3><p>{selected.description}</p><ul>{selected.details.map(d=><li key={d}>{d}</li>)}</ul><small>Detaylı kullanım bilgisi için ZOOVIA ile iletişime geçin.</small></div></section></div>}</main>}
+import Link from "next/link";
+import { useMemo, useState } from "react";
+import { products, productGroups } from "./products-data";
+
+const slugify = (name: string) => name.toLocaleLowerCase("tr-TR").replace(/®/g, "").replace(/ı/g, "i").replace(/ğ/g, "g").replace(/ü/g, "u").replace(/ş/g, "s").replace(/ö/g, "o").replace(/ç/g, "c").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+
+export default function Products() {
+  const [active, setActive] = useState<string>("Tümü");
+  const visible = useMemo(() => active === "Tümü" ? products : products.filter(p => p.group === active), [active]);
+  return <main className="page-shell products-page">
+    <div className="eyebrow">ZOOVIA ÜRÜN KOLEKSİYONU</div>
+    <h1>Her gramında<br/><em>güven.</em></h1>
+    <p className="page-lead">Hayvan besleme ihtiyaçlarına yönelik ZOOVIA ürün serisi.</p>
+    <div className="product-filter">{productGroups.map(g => <button type="button" key={g} className={active === g ? "selected" : ""} onClick={() => setActive(g)}>{g}</button>)}</div>
+    <div className="product-gallery">{visible.map(p => <Link className="product-tile product-tile-link" key={p.name} href={`/products/${slugify(p.name)}`} aria-label={`${p.name} ürün detaylarını incele`}>
+      <div className="product-photo"><Image src={p.image} alt={`${p.name} ${p.title}`} fill sizes="(max-width:760px) 90vw, 30vw" style={{objectFit:"contain"}}/><span>{p.tag}</span></div>
+      <div className="product-info"><small>{p.group.toLocaleUpperCase("tr-TR")} / ZOOVIA</small><h2>{p.name}</h2><p>{p.title}</p><p className="product-description">{p.description}</p><div className="product-detail-btn">Ürünün Tüm Özelliklerini İncele <b>↗</b></div></div>
+    </Link>)}</div>
+  </main>;
+}
